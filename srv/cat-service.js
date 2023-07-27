@@ -1,6 +1,15 @@
 const cds = require('@sap/cds')
-module.exports = function ()
+
+module.exports = cds.service.impl(async function()
 {
+    const remote = await cds.connect.to('RemoteService')
+    //const remote = cds.connect.to('RemoteService')
+    this.on('*', 'Players', async(req) => 
+    {
+        console.log('>> delegating to remote service...')
+        return remote.run(req.query)
+    })
+
     this.on( 'CREATE', 'Holes', (req,next)=>
     {
         const holeinfo = req.data
@@ -37,4 +46,4 @@ module.exports = function ()
         }
         return next();
     })
-}
+})

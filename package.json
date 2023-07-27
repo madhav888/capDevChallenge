@@ -5,14 +5,26 @@
   "repository": "<Add your repository here>",
   "license": "UNLICENSED",
   "private": true,
+
   "dependencies": {
+    "@sap-cloud-sdk/http-client": "^2.6.0",
+    "@sap-cloud-sdk/util": "^2.6.0",
     "@sap/cds": "^6",
     "express": "^4"
   },
+  
   "devDependencies": {
     "sqlite3": "^5"
   },
   "scripts": {
     "start": "cds-serve"
+  },
+  "cds": {
+    "requires": {
+      "RemoteService": {
+        "kind": "odata",
+        "model": "srv/external/RemoteService"
+      }
+    }
   }
 }
